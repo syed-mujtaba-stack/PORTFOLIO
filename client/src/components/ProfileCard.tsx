@@ -11,12 +11,11 @@ export function ProfileCard() {
             {/* Animated Gradient Background Blob */}
             <div className="absolute -inset-1 bg-gradient-to-r from-electric-blue to-neon-orange rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
 
-            <Card className="relative h-full overflow-hidden border-muted/50 bg-card/80 backdrop-blur-md p-6 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-500 ease-out shadow-2xl">
-
+            <Card className="relative h-auto overflow-hidden border-muted/50 bg-card/80 backdrop-blur-md p-4 sm:p-6 flex flex-col items-center text-center hover:scale-[1.02] transition-transform duration-500 ease-out shadow-2xl">
                 {/* Profile Image Container with Ring Animation */}
-                <div className="relative mb-6">
+                <div className="relative mb-4 sm:mb-6">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-electric-blue to-purple-600 blur-md opacity-50 animate-pulse"></div>
-                    <div className="relative w-32 h-32 rounded-full p-1 bg-gradient-to-br from-electric-blue via-transparent to-neon-orange">
+                    <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-br from-electric-blue via-transparent to-neon-orange">
                         <div className="w-full h-full rounded-full overflow-hidden border-4 border-background">
                             <img
                                 src={profilePicture}
@@ -25,8 +24,8 @@ export function ProfileCard() {
                             />
                         </div>
                     </div>
-                    <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-background rounded-full animate-ping" />
-                    <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-background rounded-full" />
+                    <div className="absolute bottom-2 right-2 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 border-2 border-background rounded-full animate-ping" />
+                    <div className="absolute bottom-2 right-2 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 border-2 border-background rounded-full" />
                 </div>
 
                 {/* Content */}

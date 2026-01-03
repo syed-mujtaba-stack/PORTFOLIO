@@ -15,10 +15,10 @@ const Hero = () => {
       {/* Overlay to ensure text readability */}
       <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px] z-0 pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 py-20 lg:py-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div className="text-center lg:text-left fade-in order-2 lg:order-1">
+          <div className="text-center lg:text-left fade-in order-2 lg:order-1 pt-8 lg:pt-0">
             <p className="text-electric-blue font-medium mb-4 tracking-wide text-lg">
               Hello, I'm
             </p>
