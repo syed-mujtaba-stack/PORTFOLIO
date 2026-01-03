@@ -9,7 +9,7 @@ const Portfolio = () => {
       id: 1,
       title: "EduGenius - AI-Powered Learning Platform",
       description: "A comprehensive e-learning platform that combines artificial intelligence with modern web technologies to deliver personalized learning experiences. Features include AI-powered tutoring, interactive exercises, real-time collaboration, and comprehensive analytics.",
-      image: "/src/assets/projects/Edugenius.png",
+      image: "/projects/Edugenius.png",
       technologies: ["Next.js", "TypeScript", "Firebase", "OpenAI", "Tailwind CSS", "Redux"],
       category: "Full Stack",
       date: "2025-09",
@@ -21,7 +21,7 @@ const Portfolio = () => {
       id: 2,
       title: "Visually AI - AI Image Generator",
       description: "A powerful AI-powered image generation platform that transforms text prompts into stunning visual art. Features include multiple AI models, style presets, and high-resolution image generation with advanced customization options.",
-      image: "/src/assets/projects/VisuallyAI.png",
+      image: "/projects/VisuallyAI.png",
       technologies: ["Next.js", "TypeScript", "OpenAI DALL-E", "Tailwind CSS", "Vercel AI SDK"],
       category: "AI Development",
       date: "2024-04",
@@ -33,7 +33,7 @@ const Portfolio = () => {
       id: 3,
       title: "Chat-Buddy - AI Chatbot",
       description: "An intelligent AI chatbot powered by Google's Gemini AI API, built with Next.js and Node.js. Features natural language understanding, context-aware responses, and a clean, responsive interface.",
-      image: "/src/assets/projects/ChatBuddy.png",
+      image: "/projects/ChatBuddy.png",
       technologies: ["Next.js", "Google Gemini AI", "Node.js", "TypeScript", "Tailwind CSS"],
       category: "AI Development",
       date: "2024-05",
@@ -45,7 +45,7 @@ const Portfolio = () => {
       id: 4,
       title: "Khizar Luxury Market",
       description: "An elegant e-commerce platform for luxury goods, featuring a modern UI built with Vite, React, and TypeScript. Includes product listings, search functionality, and a responsive design with smooth animations.",
-      image: "/src/assets/projects/KhizarLuxuryMarket.png",
+      image: "/projects/KhizarLuxuryMarket.png",
       technologies: ["Vite", "React", "TypeScript", "shadcn-ui", "Tailwind CSS"],
       category: "E-commerce",
       date: "2024-06",
@@ -57,7 +57,7 @@ const Portfolio = () => {
       id: 5,
       title: "Code Mentor AI",
       description: "An AI-powered interactive programming tutor featuring AI-generated MCQs, viva mode for interview practice, and project mode with code reviews. Includes a progress dashboard to track learning achievements and skill development.",
-      image: "/src/assets/projects/CodeMentorAI.png",
+      image: "/projects/CodeMentorAI.png",
       technologies: ["Next.js 15", "React 19", "Tailwind CSS", "Clerk Auth", "OpenRouter AI"],
       category: "Education & AI",
       date: "2024-07",
@@ -69,7 +69,7 @@ const Portfolio = () => {
       id: 6,
       title: "J.A.R.V.I.S. - AI Assistant",
       description: "A sophisticated AI assistant inspired by the iconic J.A.R.V.I.S. from Iron Man. Features natural language processing, voice recognition, and integration with various APIs to assist with tasks, answer questions, and control smart home devices.",
-      image: "/src/assets/projects/JARVIS.png",
+      image: "/projects/JARVIS.png",
       technologies: ["React", "Node.js", "Web Speech API", "OpenAI API", "WebSockets"],
       category: "AI & Automation",
       date: "2024-08",
@@ -126,7 +126,7 @@ const Portfolio = () => {
                   <Badge variant="secondary">{project.category}</Badge>
                 </div>
               </div>
-              
+
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <CardTitle className="text-xl">{project.title}</CardTitle>
@@ -139,7 +139,7 @@ const Portfolio = () => {
                   {project.description}
                 </p>
               </CardHeader>
-              
+
               <CardContent>
                 <div className="space-y-4">
                   {/* Technologies */}
@@ -150,7 +150,7 @@ const Portfolio = () => {
                       </Badge>
                     ))}
                   </div>
-                  
+
                   {/* Action Buttons */}
                   <div className="flex gap-3">
                     <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1">
