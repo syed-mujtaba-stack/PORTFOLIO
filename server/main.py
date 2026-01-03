@@ -1,89 +1,75 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import os
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import httpx
 from dotenv import load_dotenv
-import requests
 
-# Load environment variables
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+app = FastAPI()
 
-# OpenRouter configuration
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+# Configure CORS
+origins = [
+    "http://localhost:8080",  # Vite default port
+    "http://localhost:5173",  # Vite alternative port
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:5173",
+]
 
-# Track conversation history
-conversation_history = []
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Default system message
-SYSTEM_MESSAGE = {
-    "role": "system",
-    "content": "You are a helpful AI assistant. Provide clear and concise responses."
-}
+class ChatRequest(BaseModel):
+    message: str
 
-def get_ai_response(messages):
-    """
-    Send messages to OpenRouter API and get AI response
-    """
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Portfolio Backend API"}
+
+@app.post("/api/chat")
+async def chat_endpoint(request: ChatRequest):
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="OpenRouter API Key not configured")
+
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:3000",  # Your frontend URL
-        "X-Title": "AI Chat Assistant"
+        "Authorization": f"Bearer {api_key}",
+        "HTTP-Referer": "http://localhost:8080", # Optional, for including your app on openrouter.ai rankings.
+        "X-Title": "Mujtaba Portfolio", # Optional. Shows in rankings on openrouter.ai.
+        "Content-Type": "application/json"
     }
-    
-    payload = {
-        "model": "openai/gpt-3.5-turbo",  # You can change this to any model supported by OpenRouter
-        "messages": [SYSTEM_MESSAGE] + messages,
-        "temperature": 0.7,
-        "max_tokens": 1000
+
+    data = {
+        "model": "google/gemini-2.0-flash-exp:free", # Free model to avoid 402 errors
+        "messages": [
+            {"role": "system", "content": "You are a helpful AI assistant for a portfolio website. Answer questions about the portfolio owner's skills and projects professionally."},
+            {"role": "user", "content": request.message}
+        ]
     }
-    
-    try:
-        response = requests.post(
-            OPENROUTER_API_URL,
-            headers=headers,
-            json=payload
-        )
-        response.raise_for_status()
-        return response.json()["choices"][0]["message"]["content"]
-    except Exception as e:
-        print(f"Error calling OpenRouter API: {str(e)}")
-        return "I'm sorry, I encountered an error. Please try again later."
 
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    data = request.get_json()
-    user_message = data.get('message', '').strip()
-    
-    if not user_message:
-        return jsonify({"error": "Message cannot be empty"}), 400
-    
-    # Add user message to conversation history
-    conversation_history.append({"role": "user", "content": user_message})
-    
-    # Get AI response
-    ai_response = get_ai_response(conversation_history)
-    
-    # Add AI response to conversation history
-    conversation_history.append({"role": "assistant", "content": ai_response})
-    
-    # Keep conversation history manageable
-    if len(conversation_history) > 10:  # Keep last 5 exchanges (10 messages)
-        conversation_history.pop(0)
-        conversation_history.pop(0)
-    
-    return jsonify({"response": ai_response})
-
-@app.route('/api/health')
-def health_check():
-    return jsonify({"status": "healthy", "service": "AI Chat Backend"})
-
-def main():
-    port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data)
+            response.raise_for_status()
+            result = response.json()
+            # OpenRouter/OpenAI format: choices[0].message.content
+            ai_message = result["choices"][0]["message"]["content"]
+            return {"response": ai_message}
+        except httpx.HTTPStatusError as e:
+            print(f"HTTP Error: {e.response.text}")
+            if e.response.status_code == 402:
+                 raise HTTPException(status_code=402, detail="AI Service Quota Exceeded. Please check your OpenRouter credits.")
+            raise HTTPException(status_code=e.response.status_code, detail=f"OpenRouter API Error: {e.response.text}")
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    main()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000)

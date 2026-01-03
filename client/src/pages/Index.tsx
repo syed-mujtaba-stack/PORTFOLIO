@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="bg-background">
       <Hero />
-      
+
       {/* Skills Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
@@ -31,7 +31,7 @@ const Index = () => {
               Combining modern web development with cutting-edge AI to create powerful, intelligent applications.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredSkills.map((skill, index) => {
               const Icon = skill.icon;
@@ -64,7 +64,7 @@ const Index = () => {
               Stay updated with my latest thoughts on web development, AI engineering, and technology trends.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {recentPosts.map((post) => (
               <Card key={post.id} className="gradient-card hover:glow transition-all duration-300 group">
@@ -78,13 +78,13 @@ const Index = () => {
                     <Badge variant="secondary">{post.category}</Badge>
                   </div>
                 </div>
-                
+
                 <CardHeader>
                   <CardTitle className="text-lg group-hover:text-primary transition-colors">
                     {post.title}
                   </CardTitle>
                 </CardHeader>
-                
+
                 <CardContent>
                   <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                     {post.excerpt}
@@ -99,7 +99,7 @@ const Index = () => {
               </Card>
             ))}
           </div>
-          
+
           <div className="text-center">
             <Link to="/blog">
               <Button variant="hero" size="lg">
@@ -119,7 +119,7 @@ const Index = () => {
               Ready to Build Something <span className="gradient-text">Amazing</span>?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
-              Let's collaborate on your next project. Whether you need a modern web application, 
+              Let's collaborate on your next project. Whether you need a modern web application,
               AI integration, or technical consultation, I'm here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

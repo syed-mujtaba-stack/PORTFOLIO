@@ -33,7 +33,7 @@ export function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,9 +50,9 @@ export function ChatInterface() {
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Error:', error);
-      const errorMessage: Message = { 
-        role: 'assistant', 
-        content: 'Sorry, I encountered an error. Please try again.' 
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: 'Sorry, I encountered an error. Please try again.'
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
@@ -65,7 +65,7 @@ export function ChatInterface() {
       <div className="p-4 bg-primary text-primary-foreground">
         <h2 className="text-xl font-semibold">AI Chat Assistant</h2>
       </div>
-      
+
       <ScrollArea className="flex-1 p-4 space-y-4">
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full text-muted-foreground">
@@ -73,11 +73,11 @@ export function ChatInterface() {
           </div>
         ) : (
           messages.map((msg, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}
             >
-              <div 
+              <div
                 className={`flex items-start max-w-[80%] ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'} rounded-lg p-3`}
               >
                 {msg.role === 'assistant' ? (

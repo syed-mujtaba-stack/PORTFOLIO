@@ -12,7 +12,6 @@ const Navigation = () => {
     { name: "About", path: "/about" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Blog", path: "/blog" },
-    { name: "AI Chat", path: "/ai-chat" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -33,9 +32,8 @@ const Navigation = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${isActive(item.path) ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -64,11 +62,10 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-sm font-medium py-2 px-4 rounded-md transition-colors ${
-                    isActive(item.path)
+                  className={`text-sm font-medium py-2 px-4 rounded-md transition-colors ${isActive(item.path)
                       ? "text-primary bg-accent-soft"
                       : "text-muted-foreground hover:text-primary hover:bg-accent-soft"
-                  }`}
+                    }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}

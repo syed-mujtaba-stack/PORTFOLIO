@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Code, Brain, Database, Server } from "lucide-react";
 import profilePicture from "@/assets/profile-picture.jpg";
 import { downloadResume, downloadResumeAsPDF } from "@/utils/downloadResume";
+import { ProfileCard } from "@/components/ProfileCard";
 
 const About = () => {
   const skills = [
@@ -12,24 +13,29 @@ const About = () => {
     { name: "JavaScript", category: "Frontend", level: "Expert" },
     { name: "TypeScript", category: "Frontend", level: "Expert" },
     { name: "React", category: "Frontend", level: "Expert" },
+    { name: "Tailwind CSS", category: "Frontend", level: "Expert" },
     { name: "Next.js", category: "Frontend", level: "Expert" },
+    { name: "Vite.js", category: "Frontend", level: "Advanced" },
     { name: "Node.js", category: "Backend", level: "Advanced" },
-    { name: "Express", category: "Backend", level: "Advanced" },
-    { name: "MongoDB", category: "Database", level: "Advanced" },
+    { name: "Python", category: "Backend", level: "Advanced" },
+    { name: "FastAPI", category: "Backend", level: "Advanced" },
+    { name: "Flask", category: "Backend", level: "Intermediate" },
+    { name: "Sanity", category: "Database", level: "Advanced" },
     { name: "Supabase", category: "Database", level: "Advanced" },
     { name: "Firebase", category: "Database", level: "Advanced" },
-    { name: "Python", category: "Programming", level: "Advanced" },
+    { name: "Neon", category: "Database", level: "Advanced" },
+    { name: "OpenAI Agents SDK", category: "AI", level: "Advanced" },
     { name: "Prompt Engineering", category: "AI", level: "Expert" },
-    { name: "Agentic AI Development", category: "AI", level: "Advanced" },
-    { name: "API Routes", category: "Backend", level: "Advanced" },
+    { name: "Context Engineering", category: "AI", level: "Advanced" },
+    { name: "Git & GitHub", category: "Tools", level: "Expert" },
   ];
 
   const skillCategories = {
     Frontend: { icon: Code, color: "bg-blue-500" },
     Backend: { icon: Server, color: "bg-green-500" },
     Database: { icon: Database, color: "bg-purple-500" },
-    Programming: { icon: Code, color: "bg-orange-500" },
     AI: { icon: Brain, color: "bg-pink-500" },
+    Tools: { icon: Code, color: "bg-orange-500" },
   };
 
   return (
@@ -61,73 +67,28 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
           {/* Profile Card */}
           <div className="lg:col-span-1">
-            <Card className="gradient-card p-8 text-center">
-              <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-6 border-4 border-primary/20">
-                <img
-                  src={profilePicture}
-                  alt="Syed Mujtaba Abbas"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Syed Mujtaba Abbas</h3>
-              <p className="text-primary mb-4">Full Stack Developer & AI Engineer</p>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center border-b border-border pb-2">
-                  <span className="text-muted-foreground">Experience</span>
-                  <span className="font-medium">3+ Years</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-border pb-2">
-                  <span className="text-muted-foreground">Projects</span>
-                  <span className="font-medium">50+</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-border pb-2">
-                  <span className="text-muted-foreground">Specialization</span>
-                  <span className="font-medium">Full Stack & AI</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Status</span>
-                  <span className="font-medium text-green-500">Available</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3 mt-6">
-                <Button 
-                  onClick={downloadResume}
-                  variant="outline"
-                  className="border-electric-blue/30 text-electric-blue hover:bg-electric-blue/10"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Print
-                </Button>
-                <Button 
-                  onClick={downloadResumeAsPDF}
-                  className="bg-gradient-to-r from-electric-blue to-cyan hover:from-electric-blue/80 hover:to-cyan/80 text-background font-medium shadow-lg"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  PDF
-                </Button>
-              </div>
-            </Card>
+            <ProfileCard />
           </div>
-          
+
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-3xl font-bold mb-4">My Journey</h2>
             <p className="text-muted-foreground leading-relaxed">
-              I'm Syed Mujtaba Abbas, a dedicated full-stack developer and AI engineer with a passion for creating 
-              cutting-edge web applications and intelligent systems. My journey in technology has been driven by 
+              I'm Syed Mujtaba Abbas, a dedicated full-stack developer and AI engineer with a passion for creating
+              cutting-edge web applications and intelligent systems. My journey in technology has been driven by
               curiosity and a desire to solve complex problems through innovative solutions.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              With expertise spanning modern web technologies like React, Next.js, and Node.js, combined with 
-              advanced knowledge in AI development and prompt engineering, I bridge the gap between traditional 
+              With expertise spanning modern web technologies like React, Next.js, and Node.js, combined with
+              advanced knowledge in AI development and prompt engineering, I bridge the gap between traditional
               web development and the emerging world of artificial intelligence.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              I specialize in building scalable applications using modern frameworks and databases, while also 
-              developing agentic AI systems that can autonomously plan, reason, and execute complex tasks. 
+              I specialize in building scalable applications using modern frameworks and databases, while also
+              developing agentic AI systems that can autonomously plan, reason, and execute complex tasks.
               My goal is to create technology that not only meets current needs but anticipates future possibilities.
             </p>
-            
+
             {/* Achievement Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
               <div className="text-center p-4 rounded-lg bg-primary/10 border border-primary/20">
@@ -139,12 +100,28 @@ const About = () => {
                 <div className="text-sm text-muted-foreground">Technologies</div>
               </div>
               <div className="text-center p-4 rounded-lg bg-accent-orange/10 border border-accent-orange/20">
-                <div className="text-2xl font-bold text-accent-orange">3+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
+                <div className="text-2xl font-bold text-accent-orange">Fresher</div>
+                <div className="text-sm text-muted-foreground">Experience</div>
               </div>
               <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
                 <div className="text-2xl font-bold text-green-500">100%</div>
                 <div className="text-sm text-muted-foreground">Success Rate</div>
+              </div>
+            </div>
+
+            {/* Resume Download Options */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm">
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold mb-1 text-electric-blue">Professional Resume</h3>
+                <p className="text-sm text-muted-foreground">Get a detailed overview of my technical expertise and project history.</p>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Button variant="outline" size="sm" className="gap-2 border-blue-500/50 hover:bg-blue-500/10" onClick={downloadResume}>
+                  <Download className="h-4 w-4" /> Print version
+                </Button>
+                <Button size="sm" className="gap-2 bg-gradient-to-r from-electric-blue to-purple-600" onClick={downloadResumeAsPDF}>
+                  <Download className="h-4 w-4" /> Download PDF
+                </Button>
               </div>
             </div>
           </div>
@@ -157,7 +134,7 @@ const About = () => {
             {Object.entries(skillCategories).map(([category, config]) => {
               const Icon = config.icon;
               const categorySkills = skills.filter(skill => skill.category === category);
-              
+
               return (
                 <Card key={category} className="gradient-card">
                   <CardContent className="p-6">
