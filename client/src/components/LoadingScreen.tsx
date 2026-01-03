@@ -69,20 +69,20 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4">
             <div className="text-center relative w-full max-w-lg">
                 {/* Name Animation */}
-                <h1 className="text-4xl md:text-6xl font-bold mb-8 flex justify-center overflow-hidden flex-wrap">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-8 flex justify-center overflow-hidden flex-wrap px-4 text-center">
                     {fullName.split('').map((char, index) => (
                         <span
                             key={index}
                             className={`inline-block transform transition-all duration-500 ${showName
-                                    ? 'translate-y-0 opacity-100'
-                                    : 'translate-y-full opacity-0'
+                                ? 'translate-y-0 opacity-100'
+                                : 'translate-y-full opacity-0'
                                 }`}
                             style={{
                                 transitionDelay: `${index * 100}ms`,
-                                minWidth: char === ' ' ? '1rem' : 'auto'
+                                minWidth: char === ' ' ? '0.6em' : 'auto'
                             }}
                         >
-                            <span className="gradient-text">{char}</span>
+                            <span className="gradient-text whitespace-pre">{char}</span>
                         </span>
                     ))}
                 </h1>
