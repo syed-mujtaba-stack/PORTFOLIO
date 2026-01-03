@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+.python-version
+.pytest_cache/
+.coverage
+htmlcov/
+.git/
+.gitignore
+README.md
+uv.lock
+# We copy uv.lock in the Dockerfile, but ignore it for general context if needed
+# Actually, keeping it out of context but copying explicitly is safer
