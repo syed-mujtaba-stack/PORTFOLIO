@@ -70,19 +70,38 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             <div className="text-center relative w-full max-w-lg">
                 {/* Name Animation */}
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-8 flex justify-center overflow-hidden flex-wrap px-4 text-center">
-                    {fullName.split('').map((char, index) => (
-                        <span
-                            key={index}
-                            className={`inline-block transform transition-all duration-500 ${showName
-                                ? 'translate-y-0 opacity-100'
-                                : 'translate-y-full opacity-0'
-                                }`}
-                            style={{
-                                transitionDelay: `${index * 100}ms`,
-                                minWidth: char === ' ' ? '0.6em' : 'auto'
-                            }}
-                        >
-                            <span className="gradient-text whitespace-pre">{char}</span>
+                    {fullName.split(' ').map((word, wordIndex, words) => (
+                        <span key={wordIndex} className="inline-block whitespace-nowrap">
+                            {word.split('').map((char, charIndex) => {
+                                // Calculate global index for animation delay
+                                const globalIndex = words.slice(0, wordIndex).join(' ').length + (wordIndex > 0 ? 1 : 0) + charIndex;
+                                return (
+                                    <span
+                                        key={charIndex}
+                                        className={`inline-block transform transition-all duration-500 ${showName
+                                            ? 'translate-y-0 opacity-100'
+                                            : 'translate-y-full opacity-0'
+                                            }`}
+                                        style={{
+                                            transitionDelay: `${globalIndex * 100}ms`
+                                        }}
+                                    >
+                                        <span className="gradient-text whitespace-pre">{char}</span>
+                                    </span>
+                                );
+                            })}
+                            {/* Add space after the word, but not the last one */}
+                            {wordIndex < words.length - 1 && (
+                                <span
+                                    className="inline-block"
+                                    style={{
+                                        minWidth: '0.3em',
+                                        transitionDelay: `${(words.slice(0, wordIndex + 1).join(' ').length) * 100}ms`
+                                    }}
+                                >
+                                    &nbsp;
+                                </span>
+                            )}
                         </span>
                     ))}
                 </h1>
