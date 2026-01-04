@@ -15,6 +15,8 @@ origins = [
     "http://localhost:5173",  # Vite alternative port
     "http://127.0.0.1:8080",
     "http://127.0.0.1:5173",
+    "https://portfolio-75eg.vercel.app",  # Deployed frontend
+    "*",  # Allow all origins (for development)
 ]
 
 app.add_middleware(
